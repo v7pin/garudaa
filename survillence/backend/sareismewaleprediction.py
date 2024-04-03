@@ -3,7 +3,11 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 categories_labels = {
-    0: 'AnomalySamples', 1: 'NormalVideos', 
+    0: 'Abuse', 1: 'Arrest', 2: 'Arson',
+    3: 'Assault', 4: 'Burglary', 5: 'Explosion',
+    6: 'Fighting', 7: 'NormalVideos', 8: 'RoadAccidents',
+    9: 'Robbery', 10: 'Shooting', 11: 'Shoplifting',
+    12: 'Stealing', 13: 'Vandalism'
 }
 
 def extract_frames(video_path, size=(50, 50)):
@@ -32,13 +36,12 @@ def predict_video(model, frames_cnn, frames_lstm):
     predictions = model.predict([frames_cnn, frames_lstm])
     predicted_classes = np.argmax(predictions, axis=1)
 
-    # Determine the frequency of each predicted class
     unique, counts = np.unique(predicted_classes, return_counts=True)
     frequencies = dict(zip(unique, counts))
     
-    # Print out the frequency of each category
     print("Category frequencies:")
     for index, freq in frequencies.items():
+        # Use the get method to safely access the dictionary
         category = categories_labels.get(index, "Unknown Category")
         print(f"{category}: {freq}")
 
@@ -88,5 +91,5 @@ def main(video_path, model_path):
 
 if __name__ == "__main__":
     VIDEO_PATH = './testvideos/CCTV3.mp4'  # Update this with your video file path
-    MODEL_PATH = './output/modelbysandy.keras'  # Update this with your model file path
+    MODEL_PATH = './output/model.keras'  # Update this with your model file path
     main(VIDEO_PATH, MODEL_PATH)
