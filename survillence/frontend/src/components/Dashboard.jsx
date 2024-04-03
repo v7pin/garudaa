@@ -11,13 +11,20 @@ import FeedbackAndSupport from "./Features/FeedbackAndSupport";
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState("");
+  const [alertLocation, setAlertLocation] = useState(null);
+
+
+  const handleReportLocation = (location) => {
+    setAlertLocation(location);
+    setActiveComponent("Alert on Map"); // Automatically navigate to Alert on Map component
+  };
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "Live Video Feeds":
-        return <LiveVideoFeed setActiveComponent={setActiveComponent} />;
+        return <LiveVideoFeed setActiveComponent={setActiveComponent}  reportLocation={handleReportLocation}/>;
       case "Alert on Map":
-        return <AlertsOnMap setActiveComponent={setActiveComponent} />;
+        return <AlertsOnMap setActiveComponent={setActiveComponent} alertLocation={alertLocation} />;
       case "Criminal Profiling":
         return <CriminalProfiling setActiveComponent={setActiveComponent}/>;
       case "Honors and Awards":
@@ -28,6 +35,7 @@ const Dashboard = () => {
         return <DefaultContent />;
     }
   };
+
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">

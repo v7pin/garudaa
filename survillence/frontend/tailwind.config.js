@@ -18,10 +18,14 @@ export default {
           "100%":{
             transform: "rotate(20deg)",
           }
-        }
+        },
+        ping: {
+          '75%, 100%': { transform: 'scale(1.5)', opacity: '0' },
+        },
       },
       animation: {
         moveCCTV: "moveCCTV 10s linear infinite alternate  ",
+        ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
       fontFamily:{
         'poppins': ['Poppins', 'sans-serif'],

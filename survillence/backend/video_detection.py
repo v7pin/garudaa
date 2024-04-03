@@ -73,6 +73,6 @@ def main(video_path, model_path):
         print("Unable to make a prediction or invalid video prediction index.")
 
 if __name__ == "__main__":
-    VIDEO_PATH = './dance.mp4'  # Specify your video path
-    MODEL_PATH = './output/model.keras'  # Specify the path to your model
+    VIDEO_PATH = './testvideos/CCTV2.mp4'  # Specify your video path
+    MODEL_PATH = '../output/model.keras'  # Specify the path to your model
     main(VIDEO_PATH, MODEL_PATH)
