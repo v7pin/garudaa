@@ -16,9 +16,9 @@ const LiveVideoFeed = ({ setActiveComponent, reportLocation }) => {
                 videoRef.current.srcObject = stream;
             }
 
-            mediaRecorderRef.current = new MediaRecorder(stream, { mimeType: "video/webm" });
+            mediaRecorderRef.current = new MediaRecorder(stream, { mimeType: "video/mp4" });
             mediaRecorderRef.current.addEventListener("dataavailable", handleDataAvailable);
-            mediaRecorderRef.current.start(30000); // Start recording, and generate a blob every 10000ms (10s)
+            mediaRecorderRef.current.start(10000); // Start recording, and generate a blob every 30000ms (30s)
 
             return () => {
                 mediaRecorderRef.current.stop();
@@ -42,10 +42,10 @@ const LiveVideoFeed = ({ setActiveComponent, reportLocation }) => {
 
     const sendVideoToServer = async (videoBlob) => {
         const formData = new FormData();
-        formData.append("video", videoBlob);
+        formData.append("video", new File([videoBlob], "video.mp4", { type: "video/mp4" }));
 
         try {
-            const response = await axios.post("http://localhost:5000/predict_video", formData, {
+            const response = await axios.post("http://localhost:5000/classify-video", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setNotification(`Prediction: ${response.data.most_common_prediction}`);

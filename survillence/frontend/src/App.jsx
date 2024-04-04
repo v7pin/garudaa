@@ -4,6 +4,7 @@ import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import Dashboard from "./components/Dashboard";
 import PersonalDetails from "./components/PersonalDetails";
+import CriminalProfiling from "./components/Features/CriminalProfiling";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path:'/details',
     element: <PersonalDetails></PersonalDetails>
+  },
+  {
+    path:'/report',
+    element: <CriminalProfiling/>
   }
 ]);
 
